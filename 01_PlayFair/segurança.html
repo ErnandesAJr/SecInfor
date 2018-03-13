@@ -1,0 +1,195 @@
+<html>
+<script>
+var linha = 0;
+var coluna = 0;
+var grade = [[],[],[],[],[]];
+var mensagemConcertado = "";
+var mensagemCriptografada = "";
+var chave = prompt("Digaaaaaaa a Chave?").toUpperCase();
+var mensagem = prompt("Digaaaaaaa a Mensagem?").toUpperCase();
+
+var alfabeto = ['A','B','C','D','E',
+                'F','G','H','I','J',
+                'L','M','N','O','P',
+                'Q','R','S','T','U',
+                'V','W','X','Y','Z'
+                ];
+
+
+
+function criptografarMensagemMesmo(){
+
+    for(let letra = 0; letra < mensagemConcertado.length; letra++){
+        
+        var letraP = mensagemConcertado[letra];
+        var letraS = mensagemConcertado[letra + 1];
+        
+        var linhaP = Math.floor(grade.toString().replace(/,/g,"").indexOf(letraP)/5);
+        var linhaS = Math.floor(grade.toString().replace(/,/g,"").indexOf(letraS)/5);
+        
+        var colunaP = grade[linhaP].indexOf(letraP);
+        var colunaS = grade[linhaS].indexOf(letraS);
+        
+        if(linhaP === linhaS){
+            mensagemCriptografada += grade[linhaP][(colunaP + 1)%5];
+            mensagemCriptografada += grade[linhaS][(colunaS + 1)%5];
+        }else if(colunaP === colunaS){
+            mensagemCriptografada += grade[(linhaP + 1)%5][colunaP];
+            mensagemCriptografada += grade[(linhaS + 1)%5][colunaS];
+        }else{
+            mensagemCriptografada += grade[linhaP][(colunaS)];
+            mensagemCriptografada += grade[linhaS][(colunaP)];
+        }
+        
+        letra++;
+        if(letra >= mensagemConcertado.length){
+            break;
+        }
+    }
+    console.log("Mensagem Criptografada" + ": " + mensagemCriptografada);
+}
+
+
+function deografarMensagemMesmo(){
+    var mensagemDeografada = "";
+    var novaGrade = grade.toString().replace(/,/g,"");
+
+    for(let letra = 0; letra < mensagemCriptografada.length; letra++){
+        var linhaPaux = 4;
+        var linhaSaux = 4;
+        
+        var letraP = mensagemCriptografada[letra];
+        var letraS = mensagemCriptografada[letra + 1];
+        
+        var linhaP = Math.floor(novaGrade.indexOf(letraP)/5);     
+        
+        var linhaS = Math.floor(novaGrade.indexOf(letraS)/5);
+        
+        if(linhaP !== 0){
+            linhaPaux = linhaP - 1;
+        }
+
+        if(linhaS !== 0){
+            linhaSaux = linhaS - 1;
+        }
+        
+        var colunaP = grade[linhaP].indexOf(letraP);
+        var colunaS = grade[linhaS].indexOf(letraS);
+        
+        var colunaPaux = 4;
+        var colunaSaux = 4;
+        
+        if(colunaP !== 0){
+            colunaPaux = colunaP - 1;
+        }
+
+        if(colunaS !== 0){
+            colunaSaux = colunaS - 1;
+        }
+        
+        
+        if(linhaP === linhaS){
+            mensagemDeografada += grade[linhaP][(colunaPaux)];
+            mensagemDeografada += grade[linhaS][(colunaSaux)];
+            //console.log(mensagemDeografada +" ll");    
+        }else if(colunaP === colunaS){
+         
+            mensagemDeografada += grade[(linhaPaux)][colunaP];
+            mensagemDeografada += grade[(linhaSaux)][colunaS];
+            //console.log(mensagemDeografada +" cc");
+        }else{
+            mensagemDeografada += grade[linhaP][(colunaS)];
+            mensagemDeografada += grade[linhaS][(colunaP)];
+            //console.log(mensagemDeografada +" else");
+        }
+
+        letra++;
+        if(letra >= mensagemCriptografada.length){
+            break;
+        }
+    }
+    console.log("Mensagem Deografada" + ": " + mensagemDeografada);      
+}
+
+function preencherResto(){
+    for(let i = 0; i< alfabeto.length; i++){
+        if(grade.toString().indexOf(alfabeto[i]) === -1){
+            if( coluna%5 !== 0 || coluna === 0 ){
+                grade[linha][coluna] = alfabeto[i];    
+                coluna++;
+            }else{
+                linha ++;
+                coluna = 0;
+                i--;
+            }
+        }
+    }
+    //console.log(grade.toString);
+}
+function criarGradeMesmo(){
+    
+    for(let i = 0; i < chave.length; i++){
+        if( coluna%5 !== 0 || coluna === 0 ){
+            grade[linha][coluna] = chave[i];    
+            coluna++;
+        }else{
+            linha ++;
+            coluna = 0;
+            i--;
+        }
+    }
+    console.log(grade);
+}
+
+function removerRepetidas(){
+    var chave2 = '';
+    for(let i = 0; i < chave.length;i++){
+                if(chave2.indexOf(chave[i]) === -1){
+                    chave2 += chave[i];
+                }
+    }
+    chave = chave2;
+    console.log("Chave Normal: "+chave);
+    console.log("Chave Concertada" + ": " + chave2);
+}
+
+function consertarMensagemMesmo(){
+    var mensagemNormal = mensagem;
+    mensagem = mensagem.replace(/ /g,"");
+    mensagem = mensagem.replace(/,/g,"");
+    for(let i = 0; i < mensagem.length; i++){
+        if(mensagem[i] == mensagem[i+1]){
+            if(mensagem[i] == "X" || mensagem[i +1] == "X"){
+            mensagemConcertado += mensagem[i] + "Z";
+            }else{
+            mensagemConcertado += mensagem[i] + "X";
+            }
+        }else if(i < mensagem.length -1){
+            mensagemConcertado += mensagem[i] + mensagem[i+1];
+        }else{
+            mensagemConcertado += mensagem[i];
+        }
+        
+        if(mensagem.length % 2 !== 0 && i === mensagem.length - 1){
+            if(mensagem[i] == "X"){
+                mensagemConcertado += "Z";
+            }else{
+                mensagemConcertado += "X";
+            }
+        }
+        i++;      
+    }
+    console.log("Mensagem" +": " +mensagemNormal);
+    console.log("Mensagem Concertado" +": " +mensagemConcertado);
+}
+
+removerRepetidas();
+criarGradeMesmo();
+preencherResto();
+consertarMensagemMesmo();
+criptografarMensagemMesmo();
+deografarMensagemMesmo();
+
+</script>
+
+</html>
