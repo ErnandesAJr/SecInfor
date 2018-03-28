@@ -29,9 +29,8 @@ function testar(){
     
         for(let i = 0; i < linhas.length; i++ ){
               // console.log(linhas[i]); // aqui podes fazer o que precisas com cada linha
-              if(linhas[i] <= 8){
-                alocarChave("alun"+linhas[i]);
-
+            //   if(linhas[i] <= 8){
+                alocarChave(linhas[i]);
                 concertarChave();
                 descriptografar();
                 if(mensagem_descriptografar.toUpperCase().indexOf(" AMOR ") > -1 || mensagem_descriptografar.toUpperCase().indexOf(" AMOR, ") > -1 || mensagem_descriptografar.toUpperCase().indexOf(" ,AMOR ") > -1){
@@ -40,11 +39,11 @@ function testar(){
                     //apos isso testar mais uma vez agora com "alun"+linhas[i]
                     console.log(i);
                 }
-              }            
+              //}            
         }
     
         
-        //fs.writeFileSync("./texto.txt", possiveisTextos);
+        fs.writeFileSync("./texto.txt", possiveisTextos);
         // linhas.forEach(function(linha){
         
         // })
