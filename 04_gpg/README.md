@@ -1,0 +1,7 @@
+Foi feito todas as etapas do tutorial.
+
+Eu fiz com o Davi em sala de aula, mas não deu tempo cumprir todo o tutorial. Foi possível chegar até a parte de publicação no servidor, a qual eu publiquei a chave "Davi Azevedo" e o Davi postou "Ernandes Davi" , fizemos duas chaves pois era melhor para o entendimento individual, além que no futuro foi possível utilizar a extra para ajudar na assinatura. Em casa eu refiz o tutorial criando uma chave minha chamada "Ernandes Azevedo Jr" , a qual eu publiquei e utilizei em todas as etapas do tutorial, incluindo a criptografia da mensagem. Eu e o Davi trocamos as chaves públicas,além de já ter compartilhado com as chaves que já aviamos feito, também utilizei a chave do Samuel Alves para ter um leque maior de assinaturas.
+
+Os prints mostram passo a passo da criação da chave "Ernandes Azevedo Jr" incluindo o acréscimo de uma foto e publicação no servidor remoto, a importação da chave do Davi , Samuel e minhas chaves extras, a criação de uma mensagem criptografada, a importação das mensagens que eu utilizei (está em pastas sepadaras por quem me enviou) , a verificação de mensagens recebidas e a deografia das mensagens, além da revorgação da minha chave "Ernandes Azevedo Jr".
+
+Os passos estão na pasta de Imagens, estão inumerados por passo 1 ,2 ... 15 na ordem do tuturial. Obs: fiz prints de confirmação com o comando "gpg --list-keys" que mostra as chaves que estão no meu computador com seus status.
